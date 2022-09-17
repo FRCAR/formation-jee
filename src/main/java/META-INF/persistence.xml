@@ -6,7 +6,7 @@
     <persistence-unit name="PersisterPU">
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test_mem "/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:C:/dev/h2-data/sample"/>
             <property name="javax.persistence.jdbc.user" value="test"/>
             <property name="javax.persistence.jdbc.password" value="test"/>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
