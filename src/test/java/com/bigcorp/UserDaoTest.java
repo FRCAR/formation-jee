@@ -8,27 +8,30 @@ import javax.persistence.Persistence;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.bigcorp.persister.entity.Message;
+import com.bigcorp.persister.model.BigCorpUser;
 
-public class MessageDaoTest {
+
+public class UserDaoTest {
 
     @Test
     public void testSave() {
-        Message message = new Message();
-        message.setText("Hello World!");
+        BigCorpUser user = new BigCorpUser();
+        user.setFirstName("Jean");
+        user.setLastName("Dupond");
+        user.setActive(Boolean.TRUE);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersisterPU");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        em.persist(message);
+        em.persist(user);
         tx.commit();
         em.close();
 
-        Assert.assertNotNull(message.getId());
+        Assert.assertNotNull(user.getId());
         em = emf.createEntityManager();
-        Message messageFromDb = em.find(Message.class, message.getId());
-        Assert.assertEquals(message.getId(), messageFromDb.getId());
-        Assert.assertEquals(message.getText(), messageFromDb.getText());
+        BigCorpUser userFromDb = em.find(BigCorpUser.class, user.getId());
+        Assert.assertEquals(user.getId(), userFromDb.getId());
+        Assert.assertEquals(user.getFirstName(), userFromDb.getFirstName());
         em.close();
 
     }

@@ -10,7 +10,7 @@
 		</encoder>
 	</appender>
 
-    <root level="test">
+    <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
 
