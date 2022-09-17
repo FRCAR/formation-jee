@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 import com.bigcorp.persister.model.BigCorpUser;
 
 
-public class UserDao {
+public class BigCorpUserDao {
 
     public void persist(BigCorpUser user){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersisterPU");

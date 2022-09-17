@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.bigcorp.persister.model.BigCorpUser;
 
 
-public class UserDaoTest {
+public class BigCorpUserDaoTest {
 
     @Test
     public void testSave() {
