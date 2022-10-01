@@ -1,4 +1,4 @@
-package com.bigcorp.booking.faces.bean;
+package com.bigcorp.booking.faces.facebean;
 
 import java.io.Serializable;
 import java.util.List;

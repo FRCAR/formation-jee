@@ -9,7 +9,7 @@
 </h:head>
 <h:body>
 	<h:outputStylesheet name="css/stylesheet.css" target="head" />
-
+	#{msg.cancel}
 	<h:form>
 		<h:commandLink id="create-restaurant" value="create restaurant"
 			action="#{restaurantFaceBean.displayCreate}" />
@@ -21,6 +21,11 @@
 		<h:commandLink id="manage-restaurant-type"
 			value="Manage restaurant types"
 			action="#{restaurantTypeFaceBean.displayAll}" />
+		<br />
+		<br />
+		<h:commandLink id="change-locale"
+			value="Change locale"
+			action="#{applicationFaceBean.switchLocale}" />
 		<br />
 
 		<label for="restaurantTypeFilter">Filtre pour les types de restaurant</label>

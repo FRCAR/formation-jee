@@ -1,13 +1,12 @@
-package com.bigcorp.booking.faces.controller;
+package com.bigcorp.booking.faces.facebean;
 
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.annotation.ManagedProperty;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.bigcorp.booking.faces.bean.RestaurantTypeFormBean;
+import com.bigcorp.booking.faces.formbean.RestaurantTypeFormBean;
 import com.bigcorp.booking.model.RestaurantType;
 import com.bigcorp.booking.service.RestaurantTypeService;
 
