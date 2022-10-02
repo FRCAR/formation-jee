@@ -2,16 +2,17 @@ package com.bigcorp.booking.service;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import com.bigcorp.booking.dao.RestaurantTypeDao;
 import com.bigcorp.booking.model.RestaurantType;
 
-@Named
-@Dependent
+@Stateless
 public class RestaurantTypeService {
 
 	@Inject
@@ -21,7 +22,7 @@ public class RestaurantTypeService {
 		return this.restaurantTypeDao.findAll();
 	}
 
-	@Transactional
+	@TransactionAttribute
 	public RestaurantType save(RestaurantType restaurantType) {
 		return this.restaurantTypeDao.merge(restaurantType);
 	}

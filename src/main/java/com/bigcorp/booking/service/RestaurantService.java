@@ -2,6 +2,8 @@ package com.bigcorp.booking.service;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -10,13 +12,13 @@ import com.bigcorp.booking.dao.RestaurantDao;
 import com.bigcorp.booking.model.Restaurant;
 import com.bigcorp.booking.model.RestaurantType;
 
-@ApplicationScoped
+@Stateless
 public class RestaurantService {
 
 	@Inject
 	private RestaurantDao restaurantDao;
 
-	@Transactional
+	@TransactionAttribute
 	public Restaurant createRestaurant(String name) {
 		Restaurant restaurant = new Restaurant();
 		restaurant.setName(name);

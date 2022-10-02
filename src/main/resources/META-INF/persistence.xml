@@ -13,8 +13,6 @@
 		transaction-type="JTA">
 		<jta-data-source>myDataSourcePlus</jta-data-source>
 		<non-jta-data-source>myDataSourcePlusNonJta</non-jta-data-source>
-		<class>com.bigcorp.booking.model.Restaurant</class>
-		<class>com.bigcorp.booking.model.RestaurantType</class>
 		<properties>
 			<!--property name="javax.persistence.jdbc.driver" value="org.h2.Driver" 
 				/> <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:C:/dev/h2-data/sample" 

@@ -1,39 +1,27 @@
-package com.bigcorp.booking.model;
+package com.bigcorp.booking.rest.restbean;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
 
-import org.apache.johnzon.mapper.JohnzonIgnore;
-
-@Entity
-@Table(name = "RESTAURANT")
-public class Restaurant {
+public class RestaurantRestBean   {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
 	private Long id;
+	
+	@javax.validation.constraints.Email
 	private String name;
+	
+	@AssertTrue
 	private Boolean active;
 	private String address;
 	private String phone;
 	private String email;
+	private Long restaurantTypeId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="RESTAURANT_TYPE_ID")
-	private RestaurantType type;
-	
-
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {	
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -51,14 +39,6 @@ public class Restaurant {
 
 	public void setActive(Boolean active) {
 		this.active = active;
-	}
-
-	public RestaurantType getType() {
-		return type;
-	}
-
-	public void setType(RestaurantType type) {
-		this.type = type;
 	}
 
 	public String getAddress() {
@@ -85,4 +65,12 @@ public class Restaurant {
 		this.email = email;
 	}
 
+	public Long getRestaurantTypeId() {
+		return restaurantTypeId;
+	}
+
+	public void setRestaurantTypeId(Long restaurantTypeId) {
+		this.restaurantTypeId = restaurantTypeId;
+	}
+	
 }
