@@ -25,7 +25,7 @@ public class ExampleService {
 	}
 
 	public Example findById(Long id) {
-		return this.exampleDao.find(id);
+		return this.exampleDao.findById(id);
 	}
 
 }

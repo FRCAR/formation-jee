@@ -16,7 +16,7 @@ public class ExampleDao {
 		return this.entityManager.merge(object);
 	}
 
-	public Example find(Long id) {
+	public Example findById(Long id) {
 		return this.entityManager.find(Example.class, id);
 	}
 

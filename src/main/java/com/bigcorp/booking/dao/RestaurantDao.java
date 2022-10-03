@@ -1,25 +1,36 @@
 package com.bigcorp.booking.dao;
 
+import java.util.Collections;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 import com.bigcorp.booking.model.Restaurant;
-import com.bigcorp.booking.model.RestaurantType;
 
-@Named
-@ApplicationScoped
-public class RestaurantDao extends BaseDao<Restaurant> {
+@Stateless
+public class RestaurantDao extends AbstractDao<Restaurant> {
 
-	public List<Restaurant> findByName(String name) {
-		return this.entityManager
-				.createQuery("select r from Restaurant r where r.name like :name ", Restaurant.class)
-				.setParameter("name", LIKE_JOKER + name + LIKE_JOKER).getResultList();
+	@SuppressWarnings("unchecked")
+	public Restaurant findById(Long id) {
+		List<Restaurant> result = this.entityManager
+				.createQuery(
+						"select distinct r from Restaurant r left outer join fetch r.restaurantType where r.id = :id")
+				.setParameter("id", id).getResultList();
+		if (result.isEmpty()) {
+			return null;
+		}
+		return result.get(0);
 	}
 
-    public List<Restaurant> findAll() {
-        return this.entityManager.createQuery("select r from Restaurant r", Restaurant.class).getResultList();
-    }
+	public List<Restaurant> findLike(String name) {
+		if (name == null || name.isEmpty()) {
+			return Collections.emptyList();
+		}
+		TypedQuery<Restaurant> query = this.entityManager.createQuery(
+				"SELECT DISTINCT r FROM Restaurant r " + " WHERE upper(r.name) like :name", Restaurant.class);
+		query.setParameter("name", "%" + name.toUpperCase() + "%");
+		return query.getResultList();
+	}
 
 }

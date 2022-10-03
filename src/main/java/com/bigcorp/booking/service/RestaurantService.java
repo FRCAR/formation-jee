@@ -4,13 +4,10 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import com.bigcorp.booking.dao.RestaurantDao;
 import com.bigcorp.booking.model.Restaurant;
-import com.bigcorp.booking.model.RestaurantType;
 
 @Stateless
 public class RestaurantService {
@@ -18,25 +15,21 @@ public class RestaurantService {
 	@Inject
 	private RestaurantDao restaurantDao;
 
-	@TransactionAttribute
-	public Restaurant createRestaurant(String name) {
-		Restaurant restaurant = new Restaurant();
-		restaurant.setName(name);
-		this.restaurantDao.merge(restaurant);
-		return restaurant;
-	}
-	
-	public List<Restaurant> findByName(String name){
-		return this.restaurantDao.findByName(name);
-	}
-	
-	@Transactional
-	public Restaurant save(Restaurant restaurant) {
-		return this.restaurantDao.merge(restaurant);
+	public Restaurant findById(Long id) {
+		return this.restaurantDao.findById(id);
 	}
 
-	public Restaurant findById(Long id) {
-		return this.restaurantDao.find(Restaurant.class, id);
+	@TransactionAttribute
+	public Restaurant save(Restaurant restaurantType) {
+		return this.restaurantDao.merge(restaurantType);
+	}
+
+	public void remove(Restaurant restaurant) {
+		this.restaurantDao.remove(restaurant);
+	}
+
+	public List<Restaurant> findByName(String name) {
+		return this.restaurantDao.findLike(name);
 	}
 
 }

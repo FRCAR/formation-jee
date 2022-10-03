@@ -1,27 +1,20 @@
 package com.bigcorp.booking.dao;
 
-import java.util.List;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.swing.AbstractAction;
 
 import com.bigcorp.booking.model.RestaurantType;
 
-@Named
-@ApplicationScoped
-public class RestaurantTypeDao extends BaseDao<RestaurantType> {
+@Stateless
+public class RestaurantTypeDao extends AbstractDao<RestaurantType> {
 
-	public List<RestaurantType> findAll() {
-		return this.entityManager.createQuery("select r from RestaurantType r", RestaurantType.class).getResultList();
-	}
+	@PersistenceContext
+	protected EntityManager entityManager;
 
-	public List<RestaurantType> findLikeName(String name) {
-		if (name == null) {
-			name = "";
-		}
-		return this.entityManager
-				.createQuery("select r from RestaurantType r where r.name like :name ", RestaurantType.class)
-				.setParameter("name", BaseDao.LIKE_JOKER + name + BaseDao.LIKE_JOKER).getResultList();
+	public RestaurantType findById(Long id) {
+       return super.findById(RestaurantType.class, id);
 	}
 
 }

@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-package com.bigcorp.booking.hello2;
+package com.bigcorp.booking.servlet;
 
 
 import java.io.IOException;
