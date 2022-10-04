@@ -4,8 +4,8 @@
 <head>
 <title>Date JSP</title>
 </head>
-<% SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy"); %>
+<% String message = "hello"; %>
 <body>
-<h1>Welcome to Tomcat!!!! Today is <%= "Hello World" %> </h1>
+<h1>Welcome to Tomcat!!!! I wanna say <%= message %> </h1>
 </body>
 </html>

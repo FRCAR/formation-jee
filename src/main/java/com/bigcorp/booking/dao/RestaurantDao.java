@@ -23,6 +23,17 @@ public class RestaurantDao extends AbstractDao<Restaurant> {
 		return result.get(0);
 	}
 
+	@SuppressWarnings("unchecked")
+	public Restaurant findWithManagersById(Long id) {
+		List<Restaurant> result = this.entityManager
+				.createQuery("select distinct r from Restaurant r left outer join fetch r.managers where r.id = :id")
+				.setParameter("id", id).getResultList();
+		if (result.isEmpty()) {
+			return null;
+		}
+		return result.get(0);
+	}
+
 	public List<Restaurant> findLike(String name) {
 		if (name == null || name.isEmpty()) {
 			return Collections.emptyList();

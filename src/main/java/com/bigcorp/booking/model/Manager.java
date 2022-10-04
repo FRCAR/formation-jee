@@ -3,26 +3,34 @@ package com.bigcorp.booking.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RESTAURANT_TYPE")
-public class RestaurantType {
+@Table(name="BOOKING_MANAGER")
+public class Manager {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
-	
+
 	private String name;
-	
-	@OneToMany(mappedBy = "restaurantType", fetch = FetchType.LAZY)
+
+	@ManyToMany(mappedBy = "managers")
 	private Set<Restaurant> restaurants = new HashSet<>();
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(
+	    	name="CONTACT_DATA", unique=true, nullable=false, updatable=false)
+	private ContactData contactData = new ContactData();
 
 	public Long getId() {
 		return id;
@@ -48,6 +56,16 @@ public class RestaurantType {
 		this.restaurants = restaurants;
 	}
 
+	public ContactData getContactData() {
+		return contactData;
+	}
+
+	public void setContactData(ContactData contactData) {
+		this.contactData = contactData;
+	}
+	
+	
+	
 	
 
 }

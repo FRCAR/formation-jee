@@ -14,7 +14,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet Custo</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -22,7 +22,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>greeting.jsf</welcome-file>
+        <welcome-file>front-page.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
     

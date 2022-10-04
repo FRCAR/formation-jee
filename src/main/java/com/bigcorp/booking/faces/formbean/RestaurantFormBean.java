@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Size;
 
 @Named
 @ViewScoped
@@ -11,7 +13,9 @@ public class RestaurantFormBean implements Serializable {
 	
 	public static final long serialVersionUID = 1L;
 	private Long id;
+	@Size(min=5)
 	private String name;
+	@AssertTrue
 	private Boolean active;
 	private String address;
 	private String phone;

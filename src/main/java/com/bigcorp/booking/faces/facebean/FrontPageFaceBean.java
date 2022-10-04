@@ -37,7 +37,4 @@ public class FrontPageFaceBean implements Serializable {
 		return this.restaurantTypes;
 	}
 
-	public void setRestaurantTypes(List<RestaurantType> restaurantTypes) {
-	}
-
 }

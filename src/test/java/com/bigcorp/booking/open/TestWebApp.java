@@ -8,10 +8,16 @@ import org.apache.openejb.testing.Application;
 import org.apache.openejb.testing.Classes;
 import org.apache.openejb.testing.Configuration;
 
+import com.bigcorp.booking.dao.AddressDao;
 import com.bigcorp.booking.dao.ExampleDao;
+import com.bigcorp.booking.dao.ManagerDao;
+import com.bigcorp.booking.dao.PizzeriaDao;
 import com.bigcorp.booking.dao.RestaurantDao;
 import com.bigcorp.booking.dao.RestaurantTypeDao;
+import com.bigcorp.booking.service.AddressService;
 import com.bigcorp.booking.service.ExampleService;
+import com.bigcorp.booking.service.ManagerService;
+import com.bigcorp.booking.service.PizzeriaService;
 import com.bigcorp.booking.service.RestaurantService;
 import com.bigcorp.booking.service.RestaurantTypeService;
 
@@ -30,15 +36,18 @@ public class TestWebApp {
 	}
 
 	@org.apache.openejb.testing.Module
-	@Classes(cdi = true, value = { RestaurantTypeService.class, RestaurantTypeDao.class,
+	@Classes(cdi = true, value = { 
+			RestaurantTypeService.class, RestaurantTypeDao.class,
 			ExampleService.class, ExampleDao.class,
-			RestaurantService.class, RestaurantDao.class
+			RestaurantService.class, RestaurantDao.class,
+			ManagerService.class, ManagerDao.class,
+			AddressService.class, AddressDao.class,
+			PizzeriaService.class, PizzeriaDao.class
 			})
 	public WebApp app() {
 		return new WebApp();
 	}
 
-	@Configuration
 	public Properties configInMemory() throws Exception {
 		Properties p = new Properties();
 		p.put("bookingTestDatabase", "new://Resource?type=DataSource");
@@ -47,6 +56,7 @@ public class TestWebApp {
 		return p;
 	}
 
+	@Configuration
 	public Properties configLocalDataBase() throws Exception {
 		Properties p = new Properties();
 		p.put("bookingTestDatabase", "new://Resource?type=DataSource");

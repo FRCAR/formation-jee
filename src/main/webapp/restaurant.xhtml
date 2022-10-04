@@ -42,7 +42,7 @@
 			<h:inputText id="name" name="name" placeholder="Enter name here" 
 				value="#{restaurantFormBean.name}" required="true" validatorMessage="NEIIIN!!"
 				requiredMessage="NEINNEIN"/>
-			<h:message   for = "name" style = "color:red"  />
+			<h:message   for = "name" style = "color:red" />
 		</p>
 		<p>
 			<label for="active">Active :</label><br />
@@ -80,7 +80,6 @@
 			</h:selectOneMenu>
 			<h:message for = "restaurantType" style = "color:red" />
 		</p>
-
 		<p>
 			<h:commandButton value="Save" action="#{restaurantFaceBean.save}" />
 			<h:commandButton value="Cancel" immediate="true" action="front-page" />

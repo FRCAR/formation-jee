@@ -59,7 +59,6 @@ public class RestaurantFaceBean {
 			return;
 		}
 		toFormBean(restaurant);
-		
 	}
 	
 	private void toFormBean(Restaurant restaurant) {
@@ -68,10 +67,10 @@ public class RestaurantFaceBean {
 		this.restaurantFormBean.setEmail(restaurant.getEmail());
 		this.restaurantFormBean.setPhone(restaurant.getPhone());
 		this.restaurantFormBean.setActive(restaurant.getActive());
-		if(restaurant.getType() == null) {
+		if(restaurant.getRestaurantType() == null) {
 			this.restaurantFormBean.setRestaurantTypeId(null);
 		}else {
-			this.restaurantFormBean.setRestaurantTypeId(restaurant.getType().getId());
+			this.restaurantFormBean.setRestaurantTypeId(restaurant.getRestaurantType().getId());
 		}
 		
 	}
@@ -84,7 +83,7 @@ public class RestaurantFaceBean {
 		restaurant.setEmail(this.restaurantFormBean.getEmail());
 		restaurant.setPhone(this.restaurantFormBean.getPhone());
 		restaurant.setActive(this.restaurantFormBean.getActive());
-		restaurant.setType(this.restaurantTypeService.findById(this.restaurantFormBean.getRestaurantTypeId()));
+		restaurant.setRestaurantType(this.restaurantTypeService.findById(this.restaurantFormBean.getRestaurantTypeId()));
 		return restaurant;
 	}
 

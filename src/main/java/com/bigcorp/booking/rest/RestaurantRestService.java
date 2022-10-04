@@ -10,6 +10,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 import com.bigcorp.booking.model.Restaurant;
 import com.bigcorp.booking.model.RestaurantType;
@@ -37,9 +39,8 @@ public class RestaurantRestService {
  
     @POST
     @Produces("application/json")
-    @ValidateOnExecution
     @Valid
-    public RestaurantRestBean postRestaurant(@Valid @NotNull RestaurantRestBean restaurantRestBean) {
+    public RestaurantRestBean postRestaurant(@Valid RestaurantRestBean restaurantRestBean) {
     	if(restaurantRestBean == null) {
     		return null;
     	}
@@ -59,7 +60,7 @@ public class RestaurantRestService {
 		restaurant.setActive(restaurantRestBean.getActive());
     	if(restaurantRestBean.getRestaurantTypeId() != null) {
     		RestaurantType restaurantType = restaurantTypeService.findById(restaurantRestBean.getRestaurantTypeId());
-    		restaurant.setType(restaurantType);
+    		restaurant.setRestaurantType(restaurantType);
     	}
     	return restaurant;
     }
@@ -67,7 +68,7 @@ public class RestaurantRestService {
     
     private RestaurantRestBean toRestaurantRestBean(Restaurant restaurant) {
     	if(restaurant == null) {
-    		return null;
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
     	}
     	RestaurantRestBean restBean = new RestaurantRestBean();
     	restBean.setId(restaurant.getId());
@@ -76,8 +77,8 @@ public class RestaurantRestService {
 		restBean.setEmail(restaurant.getEmail());
 		restBean.setPhone(restaurant.getPhone());
 		restBean.setActive(restaurant.getActive());
-    	if(restaurant.getType() != null) {
-    		restBean.setRestaurantTypeId(restaurant.getType().getId());
+    	if(restaurant.getRestaurantType() != null) {
+    		restBean.setRestaurantTypeId(restaurant.getRestaurantType().getId());
     	}
     	return restBean;
     }

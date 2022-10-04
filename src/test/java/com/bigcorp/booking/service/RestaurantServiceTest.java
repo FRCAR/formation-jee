@@ -1,6 +1,7 @@
 package com.bigcorp.booking.service;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -9,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.bigcorp.booking.model.Manager;
 import com.bigcorp.booking.model.Restaurant;
 import com.bigcorp.booking.model.RestaurantType;
 
@@ -22,6 +24,9 @@ public class RestaurantServiceTest extends TestCase {
 
 	@Inject
 	private RestaurantTypeService restaurantTypeService;
+
+	@Inject
+	private ManagerService managerService;
 
 	@Test
 	public void testSave() throws Exception {
@@ -51,12 +56,36 @@ public class RestaurantServiceTest extends TestCase {
 		
 		Restaurant restaurant = new Restaurant();
 		restaurant.setName("testType3");
-		restaurant.setRestaurantType(restaurantType);
+		restaurant.associateWith(restaurantType);
 		restaurant = this.restaurantService.save(restaurant);
 		
 		Restaurant findById = this.restaurantService.findById(restaurant.getId());
 		RestaurantType savedRestaurantType = findById.getRestaurantType();
 		Assert.assertNotNull(savedRestaurantType);
 		Assert.assertEquals(restaurantType.getName(), savedRestaurantType.getName());
+	}
+	
+
+
+	@Test
+	public void testSaveWithManagers() throws Exception {
+		Manager manager1 = new Manager();
+		manager1.setName("manager1");
+		manager1 = managerService.save(manager1);
+
+		Manager manager2 = new Manager();
+		manager2.setName("manager2");
+		manager2 = managerService.save(manager2);
+		
+		Restaurant restaurant = new Restaurant();
+		restaurant.setName("testType4");
+		restaurant.associateWith(manager1);
+		restaurant.associateWith(manager2);
+		restaurant = this.restaurantService.save(restaurant);
+		
+		Restaurant savedRestaurant = this.restaurantService.findWithManagersById(restaurant.getId());
+		Set<Manager> savedManagers= savedRestaurant.getManagers();
+		Assert.assertNotNull(savedManagers);
+		Assert.assertEquals(2, savedManagers.size());
 	}
 }

@@ -1,22 +1,20 @@
 package com.bigcorp.booking.rest.restbean;
 
-import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
 
-public class RestaurantRestBean   {
-	
+public class RestaurantRestBean {
+
 	private Long id;
-	
-	@javax.validation.constraints.Email
+
+	@NotNull
 	private String name;
-	
-	@AssertTrue
+
 	private Boolean active;
 	private String address;
 	private String phone;
 	private String email;
 	private Long restaurantTypeId;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -39,10 +37,6 @@ public class RestaurantRestBean   {
 
 	public void setActive(Boolean active) {
 		this.active = active;
-	}
-
-	public String getAddress() {
-		return address;
 	}
 
 	public void setAddress(String address) {
@@ -72,5 +66,9 @@ public class RestaurantRestBean   {
 	public void setRestaurantTypeId(Long restaurantTypeId) {
 		this.restaurantTypeId = restaurantTypeId;
 	}
-	
+
+	public String getAddress() {
+		return address;
+	}
+
 }

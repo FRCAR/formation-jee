@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.bigcorp.booking.dao.RestaurantDao;
 import com.bigcorp.booking.model.Restaurant;
@@ -30,6 +31,14 @@ public class RestaurantService {
 
 	public List<Restaurant> findByName(String name) {
 		return this.restaurantDao.findLike(name);
+	}
+
+	public Restaurant findWithManagersById(Long id) {
+		return this.restaurantDao.findWithManagersById(id);
+	}
+
+	public RestaurantDao getRestaurantDao() {
+		return this.restaurantDao;
 	}
 
 }
