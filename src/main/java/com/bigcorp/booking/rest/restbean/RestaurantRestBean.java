@@ -1,17 +1,17 @@
 package com.bigcorp.booking.rest.restbean;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
 
 public class RestaurantRestBean {
 
 	private Long id;
 
-	@NotNull
 	private String name;
 
 	private Boolean active;
 	private String address;
 	private String phone;
+	@Email
 	private String email;
 	private Long restaurantTypeId;
 

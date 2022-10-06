@@ -48,6 +48,7 @@ public class TestWebApp {
 		return new WebApp();
 	}
 
+	@Configuration
 	public Properties configInMemory() throws Exception {
 		Properties p = new Properties();
 		p.put("bookingTestDatabase", "new://Resource?type=DataSource");
@@ -56,7 +57,6 @@ public class TestWebApp {
 		return p;
 	}
 
-	@Configuration
 	public Properties configLocalDataBase() throws Exception {
 		Properties p = new Properties();
 		p.put("bookingTestDatabase", "new://Resource?type=DataSource");

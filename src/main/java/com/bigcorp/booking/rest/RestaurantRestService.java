@@ -1,11 +1,14 @@
 package com.bigcorp.booking.rest;
  
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -19,7 +22,7 @@ import com.bigcorp.booking.rest.restbean.RestaurantRestBean;
 import com.bigcorp.booking.service.RestaurantService;
 import com.bigcorp.booking.service.RestaurantTypeService;
  
-@Named
+@Stateless
 @Path("/restaurants")
 @Produces("application/json")
 public class RestaurantRestService {
@@ -39,12 +42,11 @@ public class RestaurantRestService {
  
     @POST
     @Produces("application/json")
-    @Valid
     public RestaurantRestBean postRestaurant(@Valid RestaurantRestBean restaurantRestBean) {
     	if(restaurantRestBean == null) {
     		return null;
     	}
-        return toRestaurantRestBean(this.restaurantService.save(toRestaurant(restaurantRestBean)));
+    	return toRestaurantRestBean(this.restaurantService.save(toRestaurant(restaurantRestBean)));
     }
     
     private Restaurant toRestaurant(RestaurantRestBean restaurantRestBean) {
@@ -68,7 +70,7 @@ public class RestaurantRestService {
     
     private RestaurantRestBean toRestaurantRestBean(Restaurant restaurant) {
     	if(restaurant == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
+            throw new NotFoundException();
     	}
     	RestaurantRestBean restBean = new RestaurantRestBean();
     	restBean.setId(restaurant.getId());

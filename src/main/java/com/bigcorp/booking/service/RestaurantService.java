@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.inject.Inject;
-import javax.inject.Named;
+import javax.validation.Valid;
 
 import com.bigcorp.booking.dao.RestaurantDao;
 import com.bigcorp.booking.model.Restaurant;

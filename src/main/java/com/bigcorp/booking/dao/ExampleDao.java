@@ -1,12 +1,12 @@
 package com.bigcorp.booking.dao;
 
-import javax.ejb.Stateless;
+import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.bigcorp.booking.model.Example;
 
-@Stateless
+@Singleton
 public class ExampleDao {
 
 	@PersistenceContext
