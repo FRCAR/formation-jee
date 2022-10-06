@@ -35,8 +35,8 @@ public class RestaurantDao extends AbstractDao<Restaurant> {
 	}
 
 	public List<Restaurant> findLike(String name) {
-		if (name == null || name.isEmpty()) {
-			return Collections.emptyList();
+		if(name == null) {
+			name = "";
 		}
 		TypedQuery<Restaurant> query = this.entityManager.createQuery(
 				"SELECT DISTINCT r FROM Restaurant r " + " WHERE upper(r.name) like :name", Restaurant.class);

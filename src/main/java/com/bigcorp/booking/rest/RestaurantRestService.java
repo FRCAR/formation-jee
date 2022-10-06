@@ -1,20 +1,18 @@
 package com.bigcorp.booking.rest;
  
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.QueryParam;
 
 import com.bigcorp.booking.model.Restaurant;
 import com.bigcorp.booking.model.RestaurantType;
@@ -39,6 +37,17 @@ public class RestaurantRestService {
     public RestaurantRestBean getRestaurantById(@PathParam("id") String id) {
         return toRestaurantRestBean(this.restaurantService.findById(Long.decode(id)));
     }
+ 
+    @GET
+    @Produces("application/json")
+    public List<RestaurantRestBean> getRestaurantByName(@QueryParam("name") String name) {
+    	List<RestaurantRestBean> result = new ArrayList<>();
+        for(Restaurant restaurant : this.restaurantService.findByName(name)) {
+        	result.add(toRestaurantRestBean(restaurant));
+        }
+        return result;
+    }
+ 
  
     @POST
     @Produces("application/json")
