@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "RESTAURANT")
@@ -41,6 +41,9 @@ public class Restaurant {
 	@ManyToMany
 	@JoinTable(name = "RESTAURANT_MANAGER", joinColumns = @JoinColumn(name = "RESTAURANT_ID"), inverseJoinColumns = @JoinColumn(name = "MANAGER_ID"))
 	private Set<Manager> managers = new HashSet<>();
+	
+	@OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+	private Set<BookingTable> tables = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -130,6 +133,34 @@ public class Restaurant {
 		if (this.restaurantType != null) {
 			this.restaurantType.getRestaurants().add(this);
 		}
+	}
+
+	/**
+	 * Adds a bookingTable to this.tables 
+	 * sets this as bookingTable.restaurant
+	 * 
+	 * @param restaurantType
+	 */
+	public void addTable(BookingTable bookingTable) {
+		if(bookingTable == null) {
+			return;
+		}
+		this.tables.add(bookingTable);
+		bookingTable.setRestaurant(this);
+	}
+
+	/**
+	 * removes bookingTable from this.tables 
+	 * sets null as bookingTable.restaurant
+	 * 
+	 * @param restaurantType
+	 */
+	public void removeTable(BookingTable bookingTable) {
+		if(bookingTable == null) {
+			return;
+		}
+		this.tables.remove(bookingTable);
+		bookingTable.setRestaurant(null);
 	}
 
 }
