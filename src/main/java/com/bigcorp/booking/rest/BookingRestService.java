@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.bigcorp.booking.model.Booking;
+import com.bigcorp.booking.model.BookingTable;
 import com.bigcorp.booking.rest.restbean.BookingRestBean;
 import com.bigcorp.booking.service.BookingService;
 
@@ -30,6 +31,20 @@ public class BookingRestService {
 	@Path("users/{userId}/bookings")
 	public List<BookingRestBean> getByBookingUserId(@PathParam("userId") Long userId) {
 		return this.bookingService.findByUserId(userId).stream().map(b -> toRestBean(b)).collect(Collectors.toList());
+	}
+	
+	@GET
+	@Produces("application/json")
+	@Path("bookings")
+	public List<BookingRestBean> get() {
+		return this.bookingService.findAll().stream().map(b -> toRestBean(b)).collect(Collectors.toList());
+	}
+	
+	@GET
+	@Produces("application/json")
+	@Path("bookings/{id}")
+	public BookingRestBean getById(Long id) {
+		return toRestBean(this.bookingService.findById(id));
 	}
 	
 	@DELETE
@@ -57,6 +72,9 @@ public class BookingRestService {
 		booking.setId(bookingRestBean.getId());
 		booking.setName(bookingRestBean.getName());
 		booking.setDateTime(bookingRestBean.getDateTime());
+		BookingTable table = new BookingTable();
+		table.setId(bookingRestBean.getTableId());
+		booking.setTable(table);
 		return booking;
 	}
 
@@ -70,6 +88,7 @@ public class BookingRestService {
 		restBean.setDateTime(booking.getDateTime());
 		if (booking.getTable() != null) {
 			restBean.setTableName(booking.getTable().getName());
+			restBean.setTableId(booking.getTable().getId());
 			if (booking.getTable().getRestaurant() != null) {
 				restBean.setTableName(booking.getTable().getName());
 			}

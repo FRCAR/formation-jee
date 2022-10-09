@@ -8,6 +8,8 @@ public class BookingRestBean {
 
 	private String name;
 	
+	private Long tableId;
+	
 	private LocalDateTime dateTime;
 
 	private String tableName;
@@ -54,7 +56,13 @@ public class BookingRestBean {
 		this.dateTime = dateTime;
 	}
 
-	
+	public Long getTableId() {
+		return tableId;
+	}
+
+	public void setTableId(Long tableId) {
+		this.tableId = tableId;
+	}
 	
 
 }

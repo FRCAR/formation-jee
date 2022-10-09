@@ -58,6 +58,8 @@ public class RestaurantRestService {
     	return toRestaurantRestBean(this.restaurantService.save(toRestaurant(restaurantRestBean)));
     }
     
+    
+    
     private Restaurant toRestaurant(RestaurantRestBean restaurantRestBean) {
     	if(restaurantRestBean == null) {
     		return null;

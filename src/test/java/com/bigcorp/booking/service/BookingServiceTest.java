@@ -40,7 +40,7 @@ public class BookingServiceTest extends TestCase {
 		bookingTable.setName("testBookingTable");
 		restaurant = restaurantService.save(restaurant);
 		restaurant.addTable(bookingTable);
-		bookingTable = tableService.save(bookingTable);
+		bookingTable = tableService.save(bookingTable, restaurant.getId());
 		Booking booking = new Booking();
 		booking.setTable(bookingTable);
 		booking.setName("testBooking");
@@ -57,7 +57,7 @@ public class BookingServiceTest extends TestCase {
 		bookingTable.setName("testBookingTable");
 		restaurant = restaurantService.save(restaurant);
 		restaurant.addTable(bookingTable);
-		bookingTable = tableService.save(bookingTable);
+		bookingTable = tableService.save(bookingTable, restaurant.getId());
 		Booking booking = new Booking();
 		booking.setTable(bookingTable);
 		booking.setName("testBooking");

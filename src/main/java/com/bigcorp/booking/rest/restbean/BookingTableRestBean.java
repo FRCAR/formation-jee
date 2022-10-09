@@ -7,6 +7,8 @@ public class BookingTableRestBean {
 	private String name;
 
 	private Integer size;
+	
+	private Long restaurantId;
 
 	public Long getId() {
 		return id;
@@ -31,5 +33,15 @@ public class BookingTableRestBean {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public Long getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(Long restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+	
+	
 
 }

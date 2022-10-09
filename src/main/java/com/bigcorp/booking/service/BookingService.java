@@ -19,6 +19,10 @@ public class BookingService {
 		return this.bookingDao.findByUserIdWithRestaurant(userId);
 	}
 
+	public Booking findById(Long id) {
+		return this.bookingDao.findById(id);
+	}
+
 	@TransactionAttribute
 	public Booking save(Booking booking) {
 		return this.bookingDao.merge(booking);
@@ -27,6 +31,10 @@ public class BookingService {
 	@TransactionAttribute
 	public void deleteById(Long bookingId) {
 		this.bookingDao.deleteById(bookingId);
+	}
+
+	public List<Booking> findAll() {
+		return this.bookingDao.findAll();
 	}
 
 }
